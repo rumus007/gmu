@@ -2,7 +2,7 @@ import httpx
 import pandas as pd
 from dotenv import load_dotenv
 import os
-
+import time
 # Load environment variables from the .env file
 load_dotenv()
 
@@ -25,6 +25,14 @@ queries = [
     'site:linkedin.com/posts #%23"H1B" "Comment \\"Interested\\""'
     'site:linkedin.com/posts #%23"JobOpportunity" "remote"',
     'site:linkedin.com/posts #%23"JobOpportunity" "sponsorship"',
+    'site:linkedin.com/posts #%23"HiringNow"',
+    'site:linkedin.com/posts #%23"STEMGraduates"',
+    'site:linkedin.com/posts #%23"USJobs"',
+    'site:linkedin.com/posts #%23"FullTimeOpportunity"',
+    'site:linkedin.com/posts "drop a \\"Yes, I am interested\\""',
+    'site:linkedin.com/posts "Opportunuties Await in USA"',
+    'site:linkedin.com/posts "OPT EAD"',
+    'site:linkedin.com/posts "H4 EAD"',
 ]
 
 def googlesearch(api_key, search_engine_id, query, start_index):
@@ -75,8 +83,8 @@ for query in queries:
             # Add new links to the existing_urls set to prevent further duplication
             existing_urls.update(item.get("link") for item in new_items)
 
-            # Sleep for 5 seconds to avoid hitting API rate limits
-            time.sleep(5)
+            # Sleep for 10 seconds to avoid hitting API rate limits
+            time.sleep(10)
 
         except httpx.HTTPStatusError as e:
             print(f"HTTP error occurred: {e}")
